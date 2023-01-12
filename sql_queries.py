@@ -21,7 +21,7 @@ SONG_DATA = config['S3']['SONG_DATA']
 
 staging_events_table_drop = "DROP TABLE IF EXISTS staging_events"
 staging_songs_table_drop = "DROP TABLE IF EXISTS staging_songs"
-songplay_table_drop = "DROP TABLE IF EXISTS songplays"
+songplay_table_drop = "DROP TABLE IF EXISTS songplay"
 user_table_drop = "DROP TABLE IF EXISTS users"
 song_table_drop = "DROP TABLE IF EXISTS songs"
 artist_table_drop = "DROP TABLE IF EXISTS artists"
@@ -148,8 +148,13 @@ SELECT DISTINCT
     se.userAgent
 FROM staging_events se
 JOIN staging_songs ss
-ON (se.artist = ss.artist_name)
-WHERE se.page = 'NextSong';
+ON (se.artist = ss.artist_name
+AND se.song = ss.title
+AND ABS(se.length - ss.duration) <= 1 )
+WHERE se.page = 'NextSong'
+AND se.artist IS NOT NULL
+and se.song IS NOT NULL
+and se.length IS NOT NULL;
 """)
 
 user_table_insert = ("""

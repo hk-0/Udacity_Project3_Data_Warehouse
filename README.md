@@ -171,8 +171,8 @@ group by u.level,t.year;
 
 | level | year | count |
 |------:|-----:|------:|
-|  paid | 2018 |    22 |
-|  free | 2018 |    82 |
+|  paid | 2018 |    20 |
+|  free | 2018 |    43 |
 
 ### Example SQL 2 : Count of users online by time of day. Break the day into 4 parts - morning (6 am to 12 pm), afternoon(12 pm to 6 pm), evening (6 pm to 12 am) and night (12 am to 6 am)
 
@@ -186,10 +186,10 @@ group by u.level,t.year;
     
 | time_of_day | count |
 |------------:|------:|
-|   Afternoon |    78 |
-|       Night |    57 |
-|     Morning |    58 |
-|     Evening |    58 |
+|   Afternoon |    40 |
+|       Night |    17 |
+|     Morning |    24 |
+|     Evening |    26 |
 
 ### Example SQL 3: Top 5 Most Listened Artist among Female users
 
@@ -201,13 +201,13 @@ group by a.name,u.gender
 order by  count(songplay_id) desc limit 5;
 ```
 
-|            name | gender | count |
-|----------------:|-------:|------:|
-|            Muse |      F |  1008 |
-|   Kings Of Leon |      F |   864 |
-|       Radiohead |      F |   768 |
-|        Coldplay |      F |   744 |
-| Alliance Ethnik |      F |   630 |
+|          name | gender | count |
+|--------------:|-------:|------:|
+| Dwight Yoakam |      F |    36 |
+|    Ron Carter |      F |    12 |
+| Lonnie Gordon |      F |     8 |
+|          Muse |      F |     8 |
+|      Kid Cudi |      F |     7 |
 
 ### Example SQL 4: Top 5 Most Listened Artist among Male users
 
@@ -219,10 +219,10 @@ group by a.name,u.gender
 order by  count(songplay_id) desc limit 5;
 ```
 
-|         name | user_gender | count |
-|-------------:|------------:|------:|
-|    Radiohead |           M |   408 |
-| Foo Fighters |           M |   234 |
-|     Coldplay |           M |   192 |
-|         Muse |           M |   189 |
-|   Jason Mraz |           M |   156 |
+|                           name | user_gender | count |
+|-------------------------------:|------------:|------:|
+|                  Dwight Yoakam |           M |    14 |
+|                       Kid Cudi |           M |     6 |
+| Kid Cudi / Kanye West / Common |           M |     6 |
+|                          B.o.B |           M |     5 |
+|                  Lonnie Gordon |           M |     4 |
