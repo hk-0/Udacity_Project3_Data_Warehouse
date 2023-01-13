@@ -56,7 +56,7 @@ The data model is implemented using a star schema. The schema contains two stagi
 
 #### Fact Tables
 
-**`songplay`**
+**`songplays`**
 | COLUMN      | TYPE      | CONSTRAINT  |
 |-------------|-----------|-------------|
 | songplay_id | SERIAL    | PRIMARY KEY |
@@ -163,7 +163,7 @@ I have created the etl_aws_setup_and_test.ipynb Jupyter notebook as a helpful gu
 ### Example SQL 1 : Count of users by subscription level that listened to music on sparkify in 2018.
 
 ``` select u.level,t.year as year,count(distinct u.user_id) 
-from songplay s join time t on s.start_time = t.start_time 
+from songplays s join time t on s.start_time = t.start_time 
 join users u on s.user_id = u.user_id
 where t.year = 2018  
 group by u.level,t.year;
@@ -181,7 +181,7 @@ group by u.level,t.year;
         when t.hour >=6 and t.hour <12 then 'Morning' 
         when t.hour >=12 and t.hour <18 then 'Afternoon' 
         else 'Evening' END as time_of_day
-    ,count(distinct user_id) from songplay s join time t on s.start_time = t.start_time group by 1;
+    ,count(distinct user_id) from songplays s join time t on s.start_time = t.start_time group by 1;
 ```
     
 | time_of_day | count |
@@ -194,7 +194,7 @@ group by u.level,t.year;
 ### Example SQL 3: Top 5 Most Listened Artist among Female users
 
 ``` select a.name,u.gender, count(songplay_id)
-from songplay s join users u on s.user_id = u.user_id
+from songplays s join users u on s.user_id = u.user_id
 join artists a on s.artist_id = a.artist_id
 where u.gender ='F'
 group by a.name,u.gender
@@ -212,7 +212,7 @@ order by  count(songplay_id) desc limit 5;
 ### Example SQL 4: Top 5 Most Listened Artist among Male users
 
 ``` select a.name,u.gender as user_gender, count(songplay_id)
-from songplay s join users u on s.user_id = u.user_id
+from songplays s join users u on s.user_id = u.user_id
 join artists a on s.artist_id = a.artist_id
 where u.gender ='M'
 group by a.name,u.gender
