@@ -162,7 +162,8 @@ I have created the etl_aws_setup_and_test.ipynb Jupyter notebook as a helpful gu
 
 ### Example SQL 1 : Count of users by subscription level that listened to music on sparkify in 2018.
 
-``` select u.level,t.year as year,count(distinct u.user_id) 
+``` 
+select u.level,t.year as year,count(distinct u.user_id) 
 from songplays s join time t on s.start_time = t.start_time 
 join users u on s.user_id = u.user_id
 where t.year = 2018  
@@ -176,7 +177,8 @@ group by u.level,t.year;
 
 ### Example SQL 2 : Count of users online by time of day. Break the day into 4 parts - morning (6 am to 12 pm), afternoon(12 pm to 6 pm), evening (6 pm to 12 am) and night (12 am to 6 am)
 
-``` select case 
+``` 
+select case 
         when t.hour >=0 and t.hour <6 then 'Night'
         when t.hour >=6 and t.hour <12 then 'Morning' 
         when t.hour >=12 and t.hour <18 then 'Afternoon' 
@@ -193,7 +195,8 @@ group by u.level,t.year;
 
 ### Example SQL 3: Top 5 Most Listened Artist among Female users
 
-``` select a.name,u.gender, count(songplay_id)
+``` 
+select a.name,u.gender, count(songplay_id)
 from songplays s join users u on s.user_id = u.user_id
 join artists a on s.artist_id = a.artist_id
 where u.gender ='F'
@@ -211,7 +214,8 @@ order by  count(songplay_id) desc limit 5;
 
 ### Example SQL 4: Top 5 Most Listened Artist among Male users
 
-``` select a.name,u.gender as user_gender, count(songplay_id)
+``` 
+select a.name,u.gender as user_gender, count(songplay_id)
 from songplays s join users u on s.user_id = u.user_id
 join artists a on s.artist_id = a.artist_id
 where u.gender ='M'
